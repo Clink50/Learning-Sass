@@ -53,7 +53,7 @@ body {
 
 /* Logo - top left corner */
 
-.logo-box {
+.header__logo-box {
     /* Parent element is the .header, so positioning the logo box is relative to the .header  */
     position: absolute; 
     top: 4rem;
@@ -61,13 +61,13 @@ body {
 
 }
 
-.logo {
+.header__logo {
     height: 3.5rem; /* better to control the height than the width when styling an image */
 }
 
 /* Heading - Hero */
 
-.text-box {
+.header__text-box {
     /* Positions the text box with heading and button to the center but the origin is in the top left corner */
     position: absolute;
     top: 40%;
@@ -85,7 +85,7 @@ body {
     margin-bottom: 6rem;
 }
 
-.heading-primary-main {
+.heading-primary--main {
     display: block; /* display: block so that the two are on seperate lines */
     font-size: 6rem;
     font-weight: 400;
@@ -98,7 +98,7 @@ body {
     /* animation-delay: 3s; /* waits 3 seconds before it does the animation */
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
     display: block; /* display: block so that the two are on seperate lines */
     font-size: 2rem;
     font-weight: 700;
@@ -182,7 +182,7 @@ body {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.btn-white {
+.btn--white {
     background-color: #fff;
     color: #777;
 }
@@ -204,7 +204,7 @@ body {
     transition: all .4s;
 }
 
-.btn-white::after {
+.btn--white::after {
     background-color: #fff;
 }
 
@@ -214,7 +214,7 @@ body {
     opacity: 0; /* this is so it fades out */
 }
 
-.btn-animated {
+.btn--animated {
     animation: moveInBottom .5s ease-out .75s; /* delay for .75s */
     animation-fill-mode: backwards; /* apply styles of 0% before the animation starts */
 }
