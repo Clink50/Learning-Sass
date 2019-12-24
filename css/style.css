@@ -1,0 +1,220 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* Basic Reset of the Webpage */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; /* box-sizing is inherited from the body tag */
+}
+
+html {
+    font-size: 62.5%; /* 100% would be 16px and 16px is the default browser font-size, but we want 10px so we put 62.5% */
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #777;
+    padding: 3rem; /* our container for the white border around the entire webpage */
+    box-sizing: border-box; 
+    /* Summary: setting border-box: box-sizing in the body makes all elements take this style but not the ones in external stylesheets and then setting the universal styling to 
+    box-sizing: inherit this will now override the external stylesheets as well to use the box-sizing: border-box.
+    
+    The reason the above code is best practice is because it allows you to import any external (let's say) stylesheets that might be based on the 'box-sizing: content-box' 
+    behavior and need to remain with that behavior to work properly. So, by having the html tag set to 'border-box', every element in the document will be affected, but this will 
+    not override any external elements which were inserted in the document by the external style-sheet (because the external elements have their 'content-box' value and, since it's 
+    more specific, it will not be affected). However, if you set * { box-sizing: border-box } — ALL ELEMENTS (even the external ones) will be overridden. */
+}
+
+/* Header Element */
+
+.header {
+    height: 95vh;
+    background-image: linear-gradient(to right bottom,
+            rgba(126, 213, 111, 0.8),
+            rgba(40, 180, 131, 0.8)),
+        url("../img/hero.jpg"); /* We want the green background on top of the image, so it has to be first in the comma seperated list */
+    background-size: cover; /* take up the entire available element (in this case the header tag) */
+    background-position: top; /* leave the top untouched and crop from the bottom (based on responsive design) */
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* clip-path: polygon(50% 0, 100% 100%, 0 100%); coords go in clockwise direction ex. polygon((x, y), (x, y), (x, y), (x, y)) (bennettfeely.com/clippy to make clip objects) */
+
+}
+
+/* Logo - top left corner */
+
+.logo-box {
+    /* Parent element is the .header, so positioning the logo box is relative to the .header  */
+    position: absolute; 
+    top: 4rem;
+    left: 4rem;
+
+}
+
+.logo {
+    height: 3.5rem; /* better to control the height than the width when styling an image */
+}
+
+/* Heading - Hero */
+
+.text-box {
+    /* Positions the text box with heading and button to the center but the origin is in the top left corner */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /* transform is related to the element itself and not the header */
+    transform: translate(-50%, -50%); /* transforming on the x and y axis -50% makes the text box centered where the origin is in the center of the text box */
+    text-align: center;
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+    /* basically hides the back of a transformed element (this wasn't necessary for me) */
+    backface-visibility: hidden;
+    margin-bottom: 6rem;
+}
+
+.heading-primary-main {
+    display: block; /* display: block so that the two are on seperate lines */
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft; 
+    animation-duration: 1s;
+    animation-timing-function: ease-out; /* how fast or slow the animation happens */ 
+    
+    /* animation-iteration-count: 3; /* number of time animation happens */
+    /* animation-delay: 3s; /* waits 3 seconds before it does the animation */
+}
+
+.heading-primary-sub {
+    display: block; /* display: block so that the two are on seperate lines */
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-out; 
+}
+
+/* Animations */
+
+/* For performance reasons, only change to elements, opacity and transform if possible */
+@keyframes moveInLeft {
+    /* initial state of the element */
+    0% {
+        opacity: 0; /* to begin we want the heading-primary-main to be invisible */
+        transform: translateX(-10rem); /* make the element start further left (x-axis) so that it fades to the end position */
+    }
+
+    80% {
+        transform: translateX(1rem);
+    }
+
+    /* final state of the element */
+    100% {
+        opacity: 1; /* and end with the heading-primary-main completely visible */
+        transform: translateX(0); /* this makes the element end up how it looks in the end position that we want */
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+
+    80% {
+        transform: translateX(-1rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Buttons */
+
+/* link psuedo class - link is a state (like hover) - this would be blue like a default a tag if we didn't change this */
+/* visited psuedo class - when the user has clicked the button before and then comes back and sees it again */
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block; /* if we want to give padding/width/height to an element, it cannot be inline */
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+    font-size: 1.6rem;
+}
+
+.btn:hover {
+    transform: translateY(-.3rem); /* moves up */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); /* box-shadow: x y blur spread color; */
+}
+
+/* active psuedo class - when we click an element */
+.btn:active {
+    transform: translateY(-.1rem); /* moves in relation to the link state and NOT the hover state. It moves 1px up from the link state when we click it */
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+}
+
+.btn::after {
+    /* after psuedo element must have content and display. We use inline-block on the display because we want the 
+    after element to look exactly like the button but placed behind the original button */
+    content: "";
+    display: inline-block;
+    /* this fills the button::after height and width of the container which is the button::link itself */
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    /* the button::after was not directly behind the button::link so using absolute positioning we position the button::after relative the button::link */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.btn-white::after {
+    background-color: #fff;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6); /* increases the element */
+    /* we want a smooth transition when we hover but the transition must go on the initial state for it to work so it goes on the .btn::after */
+    opacity: 0; /* this is so it fades out */
+}
+
+.btn-animated {
+    animation: moveInBottom .5s ease-out .75s; /* delay for .75s */
+    animation-fill-mode: backwards; /* apply styles of 0% before the animation starts */
+}
