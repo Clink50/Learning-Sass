@@ -2,24 +2,60 @@
 // LOGO
 .logo {
     height: 3.25rem;
+    margin-left: 2rem;
 }
 
 
 /////////////////////////////////////////
 // SEARCH
 .search {
-    background-color: orangered;
-    &__input {
+    flex: 0 0 40%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    &__input {
+        font-family: inherit; // does not inherit from the global document
+        font-size: inherit;
+        color: inherit;
+        background-color: var(--color-grey-light-2);
+        border: none;
+        padding: .7rem 2rem;
+        border-radius: 100px;
+        width: 90%; // Start out at 90% of the elements container (90% of 40%)
+        transition: all .2s;
+
+        &:focus {
+            outline: none;
+            width: 100%; // Then on click fill the whole container (100% of 40%)
+            background-color: var(--color-grey-light-3);
+        }
+
+        &::placeholder {
+            font-weight: 100;
+            color: var(--color-grey-light-4);
+        }
     }
 
     &__button {
+        border: none;
+        background: transparent;
+        margin: -3.25rem;
 
+        &:focus {
+            outline: none;
+        }
+
+        &:active {
+            transform: translateY(2px); // When we click the button, make it go down a little like the Natours button
+        }
     }
 
     &__icon {
         height: 2rem;
         width: 2rem;
+        fill: var(--color-grey-dark-3); // color svg
     }
 }
 
@@ -27,30 +63,59 @@
 /////////////////////////////////////////
 // USER NAVIGATION
 .user-nav {
-    background-color: greenyellow;
-    &__icon-box {
+    // .header is set to align-items center but we need the user-nav to 
+    // fill the entire container of the .header so we align-self and stretch
+    // to fill the container.
+    align-self: stretch;
+    
+    display: flex;
+    align-items: center;
+    
+    // Select all children of .user-nav
+    & > * {
+        // this aligns the user-nav to the center
+        display: flex; 
+        align-items: center;
 
+        padding: 0 2rem;
+        cursor: pointer;
+        height: 100%;
+    }
+
+    & > *:hover {
+        background-color: var(--color-grey-light-2);
+    }
+
+    &__icon-box {
+        position: relative;
     }
 
     &__icon {
         height: 2.25rem;
         width: 2.25rem;
+        fill: var(--color-grey-dark-2);
     }
 
     &__notification {
+        font-size: .8rem;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        color: #fff;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.1rem;
 
-    }
-
-    &__user {
-
+        // Aligns the text content to the center
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__user-photo {
         height: 3.75rem;
         border-radius: 50%;
-    }
-
-    &__user-name {
-
+        margin-right: 1rem;
     }
 }
