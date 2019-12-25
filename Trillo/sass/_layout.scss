@@ -1,0 +1,30 @@
+.container {
+    max-width: 120rem; // container can decrease if there is not enough space otherwise it takes up 100% of the width
+    margin: 8rem auto;
+    background-color: var(--color-grey-light-2);
+    box-shadow: var(--shadow-dark);
+
+    min-height: 50rem;
+}
+
+.header {
+    height: 7rem;
+    background-color: #fff;
+    border-bottom: var(--color-grey-light-1);
+
+    display: flex;
+}
+
+.content {
+    display: flex;
+}
+
+.sidebar {
+    background-color: var(--color-grey-dark-1);
+    flex: 0 0 18%; // width is 18% of the content container
+}
+
+.hotel-view {
+    background-color: orangered;
+    flex: 1; // take up as much available space as possible (take up 92% of the content container)
+}
